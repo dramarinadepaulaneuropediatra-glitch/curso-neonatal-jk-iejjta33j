@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { BookOpen, Clock, PlayCircle, Award } from 'lucide-react'
+import { BookOpen, Clock, PlayCircle, Award, CheckCircle } from 'lucide-react'
 import { COURSE_DATA } from '@/data/course'
+import { cn } from '@/lib/utils'
 import { useCourse } from '@/context/course-context'
 import {
   Card,
