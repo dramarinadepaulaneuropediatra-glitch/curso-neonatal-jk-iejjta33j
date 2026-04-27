@@ -1,7 +1,17 @@
 import { Link, useLocation } from 'react-router-dom'
-import { BookOpen, CheckCircle, Circle, Home, Lock, Stethoscope } from 'lucide-react'
+import {
+  BookOpen,
+  CheckCircle,
+  Circle,
+  Home,
+  Lock,
+  Stethoscope,
+  Shield,
+  Settings,
+} from 'lucide-react'
 import { COURSE_DATA } from '@/data/course'
 import { useCourse } from '@/context/course-context'
+import { useAuth } from '@/hooks/use-auth'
 import {
   Sidebar,
   SidebarContent,
@@ -21,6 +31,7 @@ import { cn } from '@/lib/utils'
 export function AppSidebar() {
   const { completedLessons } = useCourse()
   const location = useLocation()
+  const { isAdmin } = useAuth()
 
   return (
     <Sidebar className="border-r border-border/50">
@@ -114,6 +125,32 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {isAdmin && (
+          <SidebarGroup>
+            <SidebarGroupLabel>Administração</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={location.pathname === '/admin'}>
+                    <Link to="/admin">
+                      <Shield className="h-4 w-4" />
+                      <span>Dashboard</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={location.pathname === '/admin/settings'}>
+                    <Link to="/admin/settings">
+                      <Settings className="h-4 w-4" />
+                      <span>Configurações</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
     </Sidebar>
   )
