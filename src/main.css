@@ -91,6 +91,18 @@
 }
 
 @layer utilities {
+  @keyframes flip {
+    from {
+      transform: perspective(400px) rotateY(0);
+    }
+    to {
+      transform: perspective(400px) rotateY(360deg);
+    }
+  }
+  .animate-flip {
+    animation: flip 1s ease-out forwards;
+  }
+
   @keyframes fade-in-up {
     from {
       transform: translateY(10px);

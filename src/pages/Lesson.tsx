@@ -4,8 +4,15 @@ import { ArrowLeft, ArrowRight, FileText, Info } from 'lucide-react'
 import { COURSE_DATA, ALL_LESSONS } from '@/data/course'
 import { useCourse } from '@/context/course-context'
 import { Button } from '@/components/ui/button'
-import { LessonQuiz } from '@/components/lesson-quiz'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { FinneganTable } from '@/components/finnegan-table'
+import { ESCAlgorithm } from '@/components/esc-algorithm'
+import { Pharmacology } from '@/components/pharmacology'
+import { Conversions } from '@/components/conversions'
+import { PocketCards } from '@/components/pocket-cards'
+import { DualQuiz } from '@/components/dual-quiz'
+import { Certificate } from '@/components/certificate'
+import { InfoCards } from '@/components/info-cards'
 
 const Lesson = () => {
   const { id } = useParams<{ id: string }>()
@@ -42,9 +49,7 @@ const Lesson = () => {
   const isCompleted = completedLessons.includes(lesson.id)
 
   const handleNext = () => {
-    if (lesson.type !== 'quiz') {
-      markCompleted(lesson.id)
-    }
+    markCompleted(lesson.id)
     if (nextLesson) {
       navigate(`/lesson/${nextLesson.id}`)
     } else {
@@ -60,63 +65,39 @@ const Lesson = () => {
 
   const renderContent = () => {
     switch (lesson.type) {
-      case 'text':
-      case 'interactive':
+      case 'info-cards':
+        return <InfoCards items={lesson.content} />
+      case 'finnegan':
+        return <FinneganTable />
+      case 'esc':
+        return <ESCAlgorithm />
+      case 'pharmacology':
+        return <Pharmacology />
+      case 'conversions':
+        return <Conversions />
+      case 'pocket-cards':
+        return <PocketCards />
+      case 'references':
         return (
-          <div className="space-y-6">
-            {lesson.imageUrl && (
-              <div className="rounded-xl overflow-hidden mb-8 shadow-sm">
-                <img
-                  src={lesson.imageUrl}
-                  alt={lesson.title}
-                  className="w-full max-h-[400px] object-cover"
-                />
-              </div>
-            )}
-            <div className="prose prose-slate prose-lg max-w-none text-foreground/90 leading-relaxed">
-              <p>{lesson.content}</p>
-            </div>
-
-            {lesson.type === 'interactive' && (
-              <Alert className="mt-8 bg-accent/10 border-accent/20">
-                <Info className="h-5 w-5 text-accent" />
-                <AlertTitle className="text-accent font-semibold">Dica Clínica</AlertTitle>
-                <AlertDescription className="text-foreground/80 mt-2">
-                  Lembre-se sempre de conferir os alarmes dos monitores antes de qualquer
-                  procedimento invasivo.
-                </AlertDescription>
-              </Alert>
-            )}
+          <div className="prose max-w-none">
+            <ul className="space-y-2">
+              <li>Pediatrics 2020. Neonatal Opioid Withdrawal Syndrome.</li>
+              <li>AAP 2024 Guidelines for Care of Infants with NOWS.</li>
+              <li>
+                NEJM 2023. Eat, Sleep, Console Approach or Usual Care for Neonatal Opioid
+                Withdrawal.
+              </li>
+            </ul>
           </div>
         )
-      case 'video':
+      case 'dual-quiz':
         return (
-          <div className="space-y-6">
-            <div className="aspect-video bg-black rounded-xl overflow-hidden shadow-lg relative flex items-center justify-center">
-              {/* Using standard HTML5 video for demo */}
-              <video
-                src={lesson.videoUrl}
-                controls
-                className="w-full h-full object-cover"
-                poster="https://img.usecurling.com/p/800/400?q=play%20video%20hospital&color=black"
-              >
-                Seu navegador não suporta a tag de vídeo.
-              </video>
-            </div>
-            <div className="prose prose-slate prose-lg max-w-none">
-              <p>{lesson.content}</p>
-            </div>
+          <div className="max-w-3xl mx-auto">
+            <DualQuiz />
           </div>
         )
-      case 'quiz':
-        return (
-          <div className="max-w-3xl mx-auto py-8">
-            <LessonQuiz
-              questions={lesson.questions || []}
-              onComplete={() => markCompleted(lesson.id)}
-            />
-          </div>
-        )
+      case 'certification':
+        return <Certificate />
       default:
         return null
     }
@@ -185,7 +166,6 @@ const Lesson = () => {
           size="lg"
           onClick={handleNext}
           className="w-full sm:w-auto bg-primary hover:bg-primary/90"
-          disabled={lesson.type === 'quiz' && !isCompleted}
         >
           {nextLesson ? 'Próxima Aula' : 'Concluir Curso'}
           {nextLesson && <ArrowRight className="ml-2 h-4 w-4" />}

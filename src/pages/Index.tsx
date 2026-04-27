@@ -138,11 +138,14 @@ const Index = () => {
                   isLocked && 'opacity-75 grayscale-[0.5]',
                 )}
               >
-                <div className="h-40 w-full relative">
+                <div className="h-40 w-full relative overflow-hidden group">
                   <img
                     src={module.thumbnail}
                     alt={module.title}
-                    className="w-full h-full object-cover"
+                    className={cn(
+                      'w-full h-full object-cover transition-transform duration-500 group-hover:scale-110',
+                      module.animation && !isLocked && `group-hover:${module.animation}`,
+                    )}
                   />
                   {isCompleted && (
                     <div className="absolute top-4 right-4 bg-green-500 text-white p-1 rounded-full shadow-lg">

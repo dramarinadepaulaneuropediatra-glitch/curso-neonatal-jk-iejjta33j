@@ -10,9 +10,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useAuth } from '@/hooks/use-auth'
+import { useNavigate } from 'react-router-dom'
 
 export default function Layout() {
   const { progressPercentage } = useCourse()
+  const { signOut, user, isAdmin } = useAuth()
+  const navigate = useNavigate()
 
   return (
     <SidebarProvider>
@@ -37,14 +41,27 @@ export default function Layout() {
             <DropdownMenu>
               <DropdownMenuTrigger className="outline-none">
                 <Avatar className="h-8 w-8 ring-2 ring-transparent transition-all hover:ring-primary/20">
-                  <AvatarImage src="https://img.usecurling.com/ppl/thumbnail?gender=female" />
-                  <AvatarFallback>DR</AvatarFallback>
+                  <AvatarFallback>{user?.name?.charAt(0) || 'U'}</AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem>Perfil</DropdownMenuItem>
-                <DropdownMenuItem>Configurações</DropdownMenuItem>
-                <DropdownMenuItem className="text-destructive">Sair</DropdownMenuItem>
+                <DropdownMenuItem disabled className="opacity-50">
+                  {user?.email}
+                </DropdownMenuItem>
+                {isAdmin && (
+                  <DropdownMenuItem onClick={() => navigate('/admin')}>
+                    Painel Admin
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem
+                  className="text-destructive"
+                  onClick={() => {
+                    signOut()
+                    navigate('/login')
+                  }}
+                >
+                  Sair
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
