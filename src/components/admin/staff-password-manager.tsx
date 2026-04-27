@@ -3,61 +3,56 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { toast } from 'sonner'
 import pb from '@/lib/pocketbase/client'
+import { useAuth } from '@/hooks/use-auth'
 
 type User = { id: string; name: string; email: string }
 
 export function StaffPasswordManager() {
-  const [users, setUsers] = useState<User[]>([])
-  const [selectedUser, setSelectedUser] = useState<string>('')
+  const { isAdmin } = useAuth()
+  const [serverId, setServerId] = useState<string | null>(null)
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    if (!isAdmin) return
     pb.send('/backend/v1/admin/users', { method: 'GET' })
-      .then((res) => setUsers(res.users || []))
+      .then((res) => {
+        const users: User[] = res.users || []
+        const serverUser = users.find((u) => u.email === 'servidor@hjk.com')
+        if (serverUser) {
+          setServerId(serverUser.id)
+        }
+      })
       .catch((err) => {
         console.error(err)
-        toast.error('Erro ao carregar servidores.')
       })
-  }, [])
+  }, [isAdmin])
+
+  if (!isAdmin) return null
 
   const handleUpdate = async () => {
-    if (!selectedUser) {
-      toast.error('Selecione um servidor.')
+    if (!serverId) {
+      toast.error('Conta de servidor universal não encontrada.')
       return
     }
     if (password.length < 8) {
       toast.error('A senha deve ter no mínimo 8 caracteres.')
       return
     }
-    if (password !== confirmPassword) {
-      toast.error('As senhas não coincidem.')
-      return
-    }
 
     setLoading(true)
     try {
-      await pb.send(`/backend/v1/admin/users/${selectedUser}/password`, {
+      await pb.send(`/backend/v1/admin/users/${serverId}/password`, {
         method: 'POST',
         body: JSON.stringify({ password }),
         headers: { 'Content-Type': 'application/json' },
       })
-      toast.success('Senha do servidor atualizada com sucesso')
+      toast.success('Senha universal do servidor atualizada com sucesso!')
       setPassword('')
-      setConfirmPassword('')
-      setSelectedUser('')
     } catch (err: any) {
-      toast.error(err.message || 'Erro ao atualizar senha.')
+      toast.error('Erro ao atualizar a senha. Tente novamente.')
     } finally {
       setLoading(false)
     }
@@ -66,29 +61,12 @@ export function StaffPasswordManager() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Atualizar Senha de Servidor</CardTitle>
-        <CardDescription>
-          Selecione um servidor e defina uma nova senha de acesso ao portal.
-        </CardDescription>
+        <CardTitle>Senha do Servidor</CardTitle>
+        <CardDescription>Defina uma nova senha de acesso universal para a equipe.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label>Servidor</Label>
-          <Select value={selectedUser} onValueChange={setSelectedUser}>
-            <SelectTrigger>
-              <SelectValue placeholder="Selecione um servidor..." />
-            </SelectTrigger>
-            <SelectContent>
-              {users.map((u) => (
-                <SelectItem key={u.id} value={u.id}>
-                  {u.name || u.email} ({u.email})
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="space-y-2">
-          <Label>Nova Senha</Label>
+          <Label>Nova Senha Universal</Label>
           <Input
             type="password"
             value={password}
@@ -96,17 +74,8 @@ export function StaffPasswordManager() {
             placeholder="Mínimo 8 caracteres"
           />
         </div>
-        <div className="space-y-2">
-          <Label>Confirmar Nova Senha</Label>
-          <Input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            placeholder="Confirme a senha"
-          />
-        </div>
-        <Button onClick={handleUpdate} disabled={loading} className="w-full">
-          {loading ? 'Atualizando...' : 'Atualizar Senha'}
+        <Button onClick={handleUpdate} disabled={loading || !serverId} className="w-full">
+          {loading ? 'Atualizando...' : 'Salvar Alteração'}
         </Button>
       </CardContent>
     </Card>
