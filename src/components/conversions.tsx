@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card'
-import { ArrowRightRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export function Conversions() {
   const formulas = [
@@ -22,7 +22,7 @@ export function Conversions() {
             <div className="flex-1 min-w-[200px]">
               <p className="font-semibold text-destructive">{f.from}</p>
             </div>
-            <ArrowRightRight className="text-muted-foreground shrink-0" />
+            <ArrowRight className="text-muted-foreground shrink-0" />
             <div className="flex-1 min-w-[200px]">
               <p className="font-semibold text-primary">{f.to}</p>
               {f.note && <p className="text-xs text-muted-foreground mt-1">{f.note}</p>}
