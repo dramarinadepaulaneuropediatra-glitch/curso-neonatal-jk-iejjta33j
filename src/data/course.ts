@@ -149,8 +149,12 @@ export const COURSE_DATA: Module[] = [
             text: 'Revisão sistemática sobre o uso de adjuvantes (Clorpromazina, Clonidina) e eficácia no controle de sintomas neurovegetativos e TGI na Síndrome de Abstinência Neonatal.',
           },
           {
-            title: 'OpenEvidence AI',
-            text: 'Análise de dados clínicos e referências sintetizadas corroborando o uso exclusivo da via oral para Metadona fracionada em 4 tomadas diárias (a cada 6h) visando estabilidade no desmame.',
+            title: 'AAP 2024 Guidelines',
+            text: 'A Academia Americana de Pediatria (AAP 2024) recomenda a Clonidina como o agente secundário preferencial em relação ao Fenobarbital, devido à ausência de riscos conhecidos de atraso no neurodesenvolvimento.',
+          },
+          {
+            title: 'Ensaios Clínicos 2024 (Clonidina vs Morfina)',
+            text: 'Dados de 2024 mostram que a monoterapia com clonidina tem duração de tratamento semelhante à morfina (17 vs 15 dias), embora 45% dos neonatos precisem de adjuvante (vs 10% na morfina).',
           },
         ],
       },

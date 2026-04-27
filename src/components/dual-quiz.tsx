@@ -48,15 +48,16 @@ export function DualQuiz() {
   const questions = track === 'med' ? MED_QUESTIONS : MULTI_QUESTIONS
 
   const handleNext = () => {
-    let newScore = score
-    if (selected === questions[current].ans) newScore += 1
+    const isCorrect = selected === questions[current].ans
+    const newScore = isCorrect ? score + 1 : score
 
     if (current < questions.length - 1) {
       setScore(newScore)
       setCurrent(current + 1)
       setSelected(null)
     } else {
-      const finalScore = Math.round((newScore / questions.length) * 100)
+      const calculatedScore = Math.round((newScore / questions.length) * 100)
+      const finalScore = Math.min(100, calculatedScore)
       setFinished(true)
       submitQuiz(finalScore, track || '')
     }
@@ -67,7 +68,7 @@ export function DualQuiz() {
       <Card className="bg-green-50 border-green-200 text-center py-8">
         <CheckCircle2 className="h-12 w-12 text-green-600 mx-auto mb-4" />
         <CardTitle className="text-green-800">Aprovado!</CardTitle>
-        <p className="text-green-700 mt-2">Sua nota: {quizScore}%</p>
+        <p className="text-green-700 mt-2 font-medium">Nota: {Math.min(100, quizScore)}%</p>
       </Card>
     )
   }
@@ -104,15 +105,18 @@ export function DualQuiz() {
   }
 
   if (finished) {
+    const displayScore = Math.min(100, quizScore)
     return (
       <Card className="text-center py-8">
-        {quizScore >= 70 ? (
+        {displayScore >= 70 ? (
           <CheckCircle2 className="h-12 w-12 text-green-600 mx-auto mb-4" />
         ) : (
           <XCircle className="h-12 w-12 text-red-600 mx-auto mb-4" />
         )}
-        <CardTitle>{quizScore >= 70 ? 'Aprovado!' : 'Tente Novamente'}</CardTitle>
-        <p className="mt-2 text-muted-foreground">Sua nota: {quizScore}% (Mínimo: 70%)</p>
+        <CardTitle>{displayScore >= 70 ? 'Aprovado!' : 'Tente Novamente'}</CardTitle>
+        <p className="mt-2 text-muted-foreground font-medium">
+          Nota: {displayScore}% (Mínimo: 70%)
+        </p>
         {!passed && (
           <Button
             className="mt-4"

@@ -32,11 +32,17 @@ export function Pharmacology() {
     },
     {
       name: 'Clonidina',
-      tags: ['Adjuvante', 'Agonista Alfa-2'],
+      tags: ['Adjuvante', 'Agonista Alfa-2', '1ª Escolha Adjuvante (AAP 2024)'],
       description:
-        'Usado como terapia adjuvante para reduzir a necessidade de opioides e atenuar hiperatividade autonômica.',
-      dose: '4–6 mcg/kg/dose a cada 4 horas.',
-      adjustments: ['Referência: Pediatrics 2020; Cochrane 2021; OpenEvidence AI'],
+        'Terapia adjuvante ou monoterapia para reduzir necessidade de opioides e atenuar hiperatividade autonômica. Preferida sobre o fenobarbital por não ter riscos conhecidos de atraso no neurodesenvolvimento (AAP 2024).',
+      dose: 'Padrão: 1 mcg/kg VO a cada 4 horas (6 mcg/kg/dia). Máximo: 12 mcg/kg/dia.',
+      adjustments: [
+        'Monoterapia: Início 1 mcg/kg/dose VO a cada 3h (8 mcg/kg/dia). Aumentar 25% a cada 12-24h se sem melhora. Máx: 12 mcg/kg/dia.',
+        'Terapia Adjuvante (2ª linha): Início 6 mcg/kg/dia divididos a cada 3-4h. Aumentar 1.5 mcg/kg/dia a cada 24h. Máx: 12 mcg/kg/dia.',
+        'Desmame: Feito aumentando o intervalo entre as doses (4h → 8h → 12h → suspensão) e NÃO pela redução da dose diária.',
+        'Monitoramento: Aferir PA e FC antes de cada dose. Suspender a dose se Pressão Arterial Sistólica < 60 mmHg.',
+        'Evidência 2024: Duração de tratamento em monoterapia semelhante à morfina (17 vs 15 dias), mas 45% requerem adjuvante (vs 10% com morfina).',
+      ],
     },
     {
       name: 'Lorazepam',
