@@ -1,66 +1,132 @@
-import { useState } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { useState, useMemo } from 'react'
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+
+type Drug = 'morphine_iv' | 'fentanyl' | 'methadone_po'
+
+const DRUG_LABELS: Record<Drug, string> = {
+  morphine_iv: 'Morfina Venosa',
+  fentanyl: 'Fentanil',
+  methadone_po: 'Metadona Oral',
+}
+
+const POTENCIES: Record<Drug, number> = {
+  fentanyl: 100, // 1 mcg of Fentanil = 100 mcg of Morfina
+  morphine_iv: 1,
+  methadone_po: 1, // Assumed 1:1 conversion ratio
+}
 
 export function Conversions() {
-  const [totalDaily, setTotalDaily] = useState<string>('')
+  const [source, setSource] = useState<Drug>('fentanyl')
+  const [target, setTarget] = useState<Drug>('morphine_iv')
+  const [doseInput, setDoseInput] = useState<string>('')
 
-  const calculate = () => {
-    const t = parseFloat(totalDaily)
-    if (isNaN(t) || t <= 0) return null
+  const isInvalid = doseInput !== '' && (isNaN(Number(doseInput)) || Number(doseInput) < 0)
 
-    // Convert to mcg/day
-    const totalMcg = Math.round(t * 1000)
-    // Needs to be divided exactly into 4 oral doses
-    const perDoseMcg = Math.round(totalMcg / 4)
+  const result = useMemo(() => {
+    if (doseInput === '' || isInvalid) return null
 
-    return { totalMcg, perDoseMcg }
-  }
+    const dose = Number(doseInput)
+    // Convert input to Morphine equivalent first, then to target
+    const morphineEqMcg = dose * POTENCIES[source]
+    const targetMcg = morphineEqMcg / POTENCIES[target]
 
-  const result = calculate()
+    return targetMcg
+  }, [doseInput, source, target, isInvalid])
+
+  const formatNumber = (num: number) => Number(num.toFixed(2)).toString()
+  const formatMg = (num: number) => Number((num / 1000).toFixed(4)).toString()
 
   return (
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Calculadora de Dose - Metadona Oral (VO)</CardTitle>
+          <CardTitle>Calculadora de Conversão de Opióides</CardTitle>
+          <CardDescription>Calcule dosagens equivalentes baseadas no peso.</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label>Dose Diária Total Prescrita (em mg)</Label>
-            <Input
-              type="number"
-              placeholder="Ex: 0.8"
-              step="0.1"
-              value={totalDaily}
-              onChange={(e) => setTotalDaily(e.target.value)}
-            />
+        <CardContent className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label>Medicamento de origem</Label>
+              <Select value={source} onValueChange={(val) => setSource(val as Drug)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione a origem" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.entries(DRUG_LABELS).map(([key, label]) => (
+                    <SelectItem key={key} value={key}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label>Medicamento de destino</Label>
+              <Select value={target} onValueChange={(val) => setTarget(val as Drug)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Selecione o destino" />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.entries(DRUG_LABELS).map(([key, label]) => (
+                    <SelectItem key={key} value={key} disabled={key === source}>
+                      {label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
 
-          {result && (
+          <div className="space-y-2">
+            <Label>Dose de entrada (mcg/Kg)</Label>
+            <Input
+              type="number"
+              placeholder="Ex: 10"
+              step="0.1"
+              min="0"
+              value={doseInput}
+              onChange={(e) => setDoseInput(e.target.value)}
+              className={isInvalid ? 'border-red-500' : ''}
+            />
+            {isInvalid && (
+              <p className="text-sm text-red-500">
+                Por favor, insira um valor numérico válido e não negativo.
+              </p>
+            )}
+          </div>
+
+          {result !== null && !isInvalid && (
             <div className="mt-6 p-4 bg-muted rounded-lg space-y-3">
-              <h3 className="font-semibold text-lg border-b pb-2">Esquema de Administração (VO)</h3>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-background p-3 rounded border">
-                  <p className="text-sm text-muted-foreground">Dose Diária Total</p>
-                  <p className="text-2xl font-bold text-primary">{result.totalMcg} mcg</p>
-                  <p className="text-xs text-muted-foreground">
-                    ({(result.totalMcg / 1000).toFixed(2)} mg)
-                  </p>
-                </div>
-                <div className="bg-background p-3 rounded border border-primary/50">
-                  <p className="text-sm text-muted-foreground">Dose por Horário (a cada 6h)</p>
-                  <p className="text-2xl font-bold text-primary">{result.perDoseMcg} mcg</p>
-                  <p className="text-xs font-medium text-primary">Dividido em 4 tomadas orais</p>
-                </div>
+              <h3 className="font-semibold text-lg border-b pb-2">Resultado</h3>
+              <div className="bg-background p-4 rounded border border-primary/20">
+                <p className="text-sm text-muted-foreground mb-1">
+                  Dose equivalente de {DRUG_LABELS[target]}
+                </p>
+                <p className="text-2xl font-bold text-primary">
+                  {formatNumber(result)} mcg/Kg{' '}
+                  <span className="text-lg text-muted-foreground">({formatMg(result)} mg/Kg)</span>
+                </p>
               </div>
-              <div className="text-sm text-amber-600 bg-amber-50 p-2 rounded border border-amber-200">
-                <strong>Diretriz:</strong> A dose total deve ser{' '}
-                <strong>obrigatoriamente dividida em 4 doses orais</strong>. Os valores calculados
-                foram arredondados para o número inteiro mais próximo (em mcg) para facilitar a
-                compreensão clínica. O uso intravenoso (IV) está contraindicado.
-              </div>
+
+              {(target === 'methadone_po' || source === 'methadone_po') && (
+                <Alert className="bg-amber-50 border-amber-200">
+                  <AlertDescription className="text-amber-800">
+                    <strong>Atenção:</strong> A Metadona deve ser administrada{' '}
+                    <strong>exclusivamente por via oral (VO)</strong>. Monitore a resposta clínica.
+                  </AlertDescription>
+                </Alert>
+              )}
             </div>
           )}
         </CardContent>
