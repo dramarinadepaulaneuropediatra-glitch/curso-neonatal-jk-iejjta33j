@@ -8,18 +8,18 @@ import { cn } from '@/lib/utils'
 const MED_QUESTIONS = [
   {
     q: 'Qual a dose de ataque do Fenobarbital?',
-    opts: ['3-5 mg/kg', '10-15 mg/kg', '20-30 mg/kg'],
+    opts: ['3-5 mg/kg', '10-20 mg/kg', '20-30 mg/kg'],
     ans: 1,
   },
   {
     q: 'Na conversão Fentanil para Morfina, qual a proporção?',
-    opts: ['1:1', '1:5', '1:10'],
+    opts: ['1:1', '1:5', '1:10 (ex: 1 mcg/kg/h = 10 mcg/kg/h)'],
     ans: 2,
   },
   {
-    q: 'Qual a dose da Morfina?',
-    opts: ['300-1000 mcg/kg/dia', '10-50 mcg/kg/dia', '1-2 mg/kg/dia'],
-    ans: 0,
+    q: 'Qual a taxa recomendada para desmame (redução) de opioides e adjuvantes após estabilização?',
+    opts: ['Apenas 10% ao dia', '10 a 20% ao dia', '20 a 30% ao dia'],
+    ans: 1,
   },
 ]
 

@@ -8,10 +8,11 @@ export function Pharmacology() {
       tags: ['Opioide sintético', 'Recomendado pelo FDA'],
       description:
         'Opioide sintético aprovado pelo FDA para abstinência de narcóticos maternos (incluindo heroína). Apresenta boa eficácia oral e meia-vida longa.',
-      dose: 'Inicial de 0.05 a 0.1 mg/kg a cada 6 horas.',
+      dose: 'Inicial de 8.3 a 16.6 mcg/kg/h (0.05 a 0.1 mg/kg/dose a cada 6 horas).',
       adjustments: [
-        'Incrementos: Aumentar em 0.05 mg/kg até 0.5–1.0 mg/kg até o controle dos sintomas.',
-        'Redução: Após controle, reduzir 10% ao dia e espaçar intervalos para 12 ou 24 horas.',
+        'Atenção: A dose máxima por horário (dose única) é de 16.6 mcg/kg/h (0.1 mg/kg).',
+        'Incrementos: Aumentar em 8.3 mcg/kg/h (0.05 mg/kg/dose) APENAS até o limite máximo de 16.6 mcg/kg/h (0.1 mg/kg/dose) por horário.',
+        'Redução: Após controle, reduzir 10 a 20% ao dia e espaçar intervalos para 12 ou 24 horas.',
         'Descontinuação: Pode ser tentada quando a dose atingir 0.05 mg/kg/dia.',
       ],
     },
@@ -23,7 +24,7 @@ export function Pharmacology() {
       dose: 'Ataque (opcional): 10–20 mg/kg. Manutenção: 3–5 mg/kg/dia.',
       adjustments: [
         'Ajustes: A manutenção pode ser ajustada pelos escores de abstinência ou aumentada em 2 mg/kg/dia.',
-        'Redução: Reduzir 10% ao dia após melhora clínica.',
+        'Redução: Reduzir 10 a 20% ao dia após melhora clínica.',
       ],
     },
     {
@@ -38,7 +39,7 @@ export function Pharmacology() {
       name: 'Diazepam',
       tags: ['Benzodiazepínico', 'Pouco Recomendado'],
       description: 'Pouco recomendado devido a problemas em recém-nascidos.',
-      dose: '0.1 a 0.3 mg/kg IM a cada 8 horas até controle.',
+      dose: '0.1 a 0.3 mg/kg IM a cada 8 horas até controle. (Pouco recomendado)',
       adjustments: [],
     },
   ]

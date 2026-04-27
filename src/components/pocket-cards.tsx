@@ -54,15 +54,18 @@ export function PocketCards() {
         <div className="space-y-4 text-sm">
           <div>
             <strong>Morfina IV para Metadona VO:</strong>
-            <p>1 mg/kg/dia IV = 0.1–0.2 mg/kg/dia VO.</p>
+            <p>41.6 mcg/kg/h (1 mg/kg/dia IV) = 4.1–8.3 mcg/kg/h (0.1–0.2 mg/kg/dia VO).</p>
+            <p className="text-muted-foreground text-xs mt-1">
+              Iniciar com 50-75% da dose. Desmame de 10 a 20% ao dia.
+            </p>
           </div>
           <div>
             <strong>Fentanil para Metadona:</strong>
-            <p>1 mcg/kg/h = 100 mcg/kg/dia.</p>
+            <p>1.0 mcg/kg/h = 4.1 mcg/kg/h (100 mcg/kg/dia).</p>
           </div>
           <div>
             <strong>Fentanil para Morfina:</strong>
-            <p>1 mcg Fentanil = 10 mcg Morfina.</p>
+            <p>1.0 mcg/kg/h Fentanil = 10.0 mcg/kg/h Morfina.</p>
           </div>
           <p className="text-xs text-muted-foreground mt-4 pt-4 border-t">
             Ref: Pediatrics 2020;146(5):e2020029074 (Patrick SW, et al.)
@@ -76,12 +79,15 @@ export function PocketCards() {
       content: (
         <div className="space-y-4 text-sm">
           <div>
-            <strong>Metadona:</strong> 0.05 a 0.1 mg/kg a cada 6h (Opioide sintético aprovado pelo
-            FDA).
+            <strong>Metadona:</strong> Inicial 8.3 a 16.6 mcg/kg/h (0.05 a 0.1 mg/kg/dose a cada
+            6h).
+            <p className="text-destructive font-medium mt-1">
+              Limite MÁXIMO absoluto: 16.6 mcg/kg/h (0.1 mg/kg) por horário.
+            </p>
+            <p className="text-muted-foreground text-xs mt-1">Redução de 10 a 20% ao dia.</p>
           </div>
           <div>
-            <strong>Fenobarbital:</strong> Manutenção 3–5 mg/kg/dia (Escolha para abstinência não
-            narcótica).
+            <strong>Fenobarbital:</strong> Manutenção 3–5 mg/kg/dia. Redução de 10 a 20% ao dia.
           </div>
           <div>
             <strong>Lorazepam:</strong> 0.05 a 0.1 mg/kg/dose EV.

@@ -4,23 +4,24 @@ import { ArrowRight, Calculator } from 'lucide-react'
 export function Conversions() {
   const formulas = [
     {
-      from: 'Morfina IV (1 mg/kg/dia)',
-      to: 'Metadona VO (0.1–0.2 mg/kg/dia)',
-      note: 'Iniciar com 50-75% da dose calculada.',
-      example: 'Exemplo: Bebê de 3kg com Morfina 3mg/dia → iniciar Metadona 0.3mg a 0.6mg/dia.',
+      from: 'Morfina IV 41.6 mcg/kg/h (1 mg/kg/dia)',
+      to: 'Metadona VO 4.1 a 8.3 mcg/kg/h (0.1–0.2 mg/kg/dia)',
+      note: 'Algoritmo seguro: Iniciar com 50-75% da dose calculada. Desmame de 10 a 20% ao dia após estabilização.',
+      example:
+        'Exemplo: Bebê de 3kg com Morfina 125 mcg/h (3mg/dia) → iniciar Metadona 12.5 a 25 mcg/h (0.3 a 0.6 mg/dia).',
     },
     {
-      from: 'Fentanil (1 mcg/kg/h)',
-      to: 'Metadona (100 mcg/kg/dia)',
+      from: 'Fentanil 1.0 mcg/kg/h',
+      to: 'Metadona 4.1 mcg/kg/h (100 mcg/kg/dia)',
       note: 'Conversão direta em dose diária total.',
       example:
-        'Exemplo: Bebê em 1 mcg/kg/h de Fentanil necessita de uma dose diária total de 100 mcg/kg de Metadona.',
+        'Exemplo: Bebê em 1.0 mcg/kg/h de Fentanil necessita de uma dose diária total de 4.1 mcg/kg/h (100 mcg/kg/dia) de Metadona.',
     },
     {
-      from: 'Fentanil',
-      to: 'Morfina',
-      note: 'Proporção 1:10',
-      example: '1 mcg de Fentanil = 10 mcg de Morfina.',
+      from: 'Fentanil 1.0 mcg/kg/h',
+      to: 'Morfina 10.0 mcg/kg/h',
+      note: 'Proporção 1:10. Desmame de 10 a 20% ao dia.',
+      example: '1.0 mcg/kg/h de Fentanil = 10.0 mcg/kg/h de Morfina.',
     },
     {
       from: 'Midazolam (100 mcg/kg)',
