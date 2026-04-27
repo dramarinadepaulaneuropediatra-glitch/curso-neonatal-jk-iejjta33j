@@ -57,7 +57,7 @@ export function DualQuiz() {
       setSelected(null)
     } else {
       const calculatedScore = Math.round((newScore / questions.length) * 100)
-      const finalScore = Math.min(100, calculatedScore)
+      const finalScore = Math.min(100, Math.max(0, calculatedScore))
       setFinished(true)
       submitQuiz(finalScore, track || '')
     }
@@ -68,7 +68,9 @@ export function DualQuiz() {
       <Card className="bg-green-50 border-green-200 text-center py-8">
         <CheckCircle2 className="h-12 w-12 text-green-600 mx-auto mb-4" />
         <CardTitle className="text-green-800">Aprovado!</CardTitle>
-        <p className="text-green-700 mt-2 font-medium">Nota: {Math.min(100, quizScore)}%</p>
+        <p className="text-green-700 mt-2 font-medium">
+          Nota: {Math.min(100, Math.max(0, quizScore))}%
+        </p>
       </Card>
     )
   }
@@ -105,7 +107,7 @@ export function DualQuiz() {
   }
 
   if (finished) {
-    const displayScore = Math.min(100, quizScore)
+    const displayScore = Math.min(100, Math.max(0, quizScore))
     return (
       <Card className="text-center py-8">
         {displayScore >= 70 ? (
