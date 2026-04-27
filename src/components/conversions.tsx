@@ -5,17 +5,16 @@ export function Conversions() {
   const formulas = [
     {
       from: 'Morfina IV 41.6 mcg/kg/h (1 mg/kg/dia)',
-      to: 'Metadona VO 4.1 a 8.3 mcg/kg/h (0.1–0.2 mg/kg/dia)',
-      note: 'Algoritmo seguro: Iniciar com 50-75% da dose calculada. Desmame de 10 a 20% ao dia após estabilização.',
+      to: 'Metadona VO 0.1 a 0.2 mg/kg/dia',
+      note: 'Uso Oral (VO) Exclusivo. Algoritmo seguro: Calcular dose diária total, iniciar com 50-75% da dose calculada e dividir em 4 tomadas iguais (a cada 6 horas).',
       example:
-        'Exemplo: Bebê de 3kg com Morfina 125 mcg/h (3mg/dia) → iniciar Metadona 12.5 a 25 mcg/h (0.3 a 0.6 mg/dia).',
+        'Exemplo: Bebê de 3kg (dose total 0.6 mg/dia) → 0.15 mg/dose a cada 6h. Limite: 0.1 mg/kg/dose.',
     },
     {
       from: 'Fentanil 1.0 mcg/kg/h',
-      to: 'Metadona 4.1 mcg/kg/h (100 mcg/kg/dia)',
-      note: 'Conversão direta em dose diária total.',
-      example:
-        'Exemplo: Bebê em 1.0 mcg/kg/h de Fentanil necessita de uma dose diária total de 4.1 mcg/kg/h (100 mcg/kg/dia) de Metadona.',
+      to: 'Metadona VO 100 mcg/kg/dia (0.1 mg/kg/dia)',
+      note: 'Conversão direta em dose diária total VO. Dividir a dose total em 4 tomadas iguais (a cada 6 horas).',
+      example: 'Exemplo: Bebê de 3kg necessita de 300 mcg/dia → 75 mcg/dose a cada 6h.',
     },
     {
       from: 'Fentanil 1.0 mcg/kg/h',
@@ -70,7 +69,8 @@ export function Conversions() {
         ))}
       </div>
       <p className="text-xs text-muted-foreground mt-4 italic text-right">
-        Referência Clínica: Pediatrics 2020;146(5):e2020029074 (Patrick SW, et al.)
+        Referência Clínica: Pediatrics 2020;146(5):e2020029074 (Patrick SW, et al.) | OpenEvidence
+        AI
       </p>
     </div>
   )

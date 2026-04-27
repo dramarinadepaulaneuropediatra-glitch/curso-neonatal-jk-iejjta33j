@@ -54,14 +54,14 @@ export function PocketCards() {
         <div className="space-y-4 text-sm">
           <div>
             <strong>Morfina IV para Metadona VO:</strong>
-            <p>41.6 mcg/kg/h (1 mg/kg/dia IV) = 4.1–8.3 mcg/kg/h (0.1–0.2 mg/kg/dia VO).</p>
+            <p>1 mg/kg/dia IV = 0.1–0.2 mg/kg/dia VO.</p>
             <p className="text-muted-foreground text-xs mt-1">
-              Iniciar com 50-75% da dose. Desmame de 10 a 20% ao dia.
+              VO Exclusivo. Calcular dose total, iniciar com 50-75% e dividir em 4x/dia (a cada 6h).
             </p>
           </div>
           <div>
-            <strong>Fentanil para Metadona:</strong>
-            <p>1.0 mcg/kg/h = 4.1 mcg/kg/h (100 mcg/kg/dia).</p>
+            <strong>Fentanil para Metadona VO:</strong>
+            <p>1.0 mcg/kg/h IV = 100 mcg/kg/dia VO.</p>
           </div>
           <div>
             <strong>Fentanil para Morfina:</strong>
@@ -79,24 +79,21 @@ export function PocketCards() {
       content: (
         <div className="space-y-4 text-sm">
           <div>
-            <strong>Metadona:</strong> Inicial 8.3 a 16.6 mcg/kg/h (0.05 a 0.1 mg/kg/dose a cada
-            6h).
-            <p className="text-destructive font-medium mt-1">
-              Limite MÁXIMO absoluto: 16.6 mcg/kg/h (0.1 mg/kg) por horário.
-            </p>
-            <p className="text-muted-foreground text-xs mt-1">Redução de 10 a 20% ao dia.</p>
+            <strong>Metadona (VO Exclusivo):</strong> Inicial 0.05 a 0.1 mg/kg/dose a cada 6h
+            (Dividir dose total diária em 4).
+            <p className="text-destructive font-medium mt-1">Limite MÁXIMO: 0.1 mg/kg por dose.</p>
           </div>
           <div>
-            <strong>Fenobarbital:</strong> Manutenção 3–5 mg/kg/dia. Redução de 10 a 20% ao dia.
+            <strong>Fenobarbital:</strong> Manutenção 3–5 mg/kg/dia.
           </div>
           <div>
-            <strong>Lorazepam:</strong> 0.05 a 0.1 mg/kg/dose EV.
+            <strong>Clorpromazina:</strong> 0.5–1 mg/kg/dose a cada 6h.
           </div>
           <div>
-            <strong>Diazepam:</strong> 0.1 a 0.3 mg/kg IM a cada 8h (Pouco recomendado).
+            <strong>Clonidina:</strong> 4–6 mcg/kg/dose a cada 4h.
           </div>
           <p className="text-xs text-muted-foreground mt-4 pt-4 border-t">
-            Ref: Pediatrics 2020;146(5):e2020029074 (Patrick SW, et al.)
+            Ref: Pediatrics 2020 | Cochrane Neonatal 2021 | OpenEvidence AI
           </p>
         </div>
       ),

@@ -56,9 +56,7 @@ export function DualQuiz() {
       setCurrent(current + 1)
       setSelected(null)
     } else {
-      const finalScore = Math.round(
-        ((newScore + (selected === questions[current].ans ? 1 : 0)) / questions.length) * 100,
-      )
+      const finalScore = Math.round((newScore / questions.length) * 100)
       setFinished(true)
       submitQuiz(finalScore, track || '')
     }

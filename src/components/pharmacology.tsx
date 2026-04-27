@@ -5,41 +5,44 @@ export function Pharmacology() {
   const protocols = [
     {
       name: 'Metadona',
-      tags: ['Opioide sintético', 'Recomendado pelo FDA'],
+      tags: ['Opioide sintético', 'Uso Oral (VO) Exclusivo'],
       description:
-        'Opioide sintético aprovado pelo FDA para abstinência de narcóticos maternos (incluindo heroína). Apresenta boa eficácia oral e meia-vida longa.',
-      dose: 'Inicial de 8.3 a 16.6 mcg/kg/h (0.05 a 0.1 mg/kg/dose a cada 6 horas).',
+        'Opioide sintético de longa ação. Uso estritamente oral (VO). Calcular a dose diária total e dividir em 4 tomadas iguais (a cada 6 horas).',
+      dose: 'Inicial: 0.05 a 0.1 mg/kg/dose a cada 6 horas.',
       adjustments: [
-        'Atenção: A dose máxima por horário (dose única) é de 16.6 mcg/kg/h (0.1 mg/kg).',
-        'Incrementos: Aumentar em 8.3 mcg/kg/h (0.05 mg/kg/dose) APENAS até o limite máximo de 16.6 mcg/kg/h (0.1 mg/kg/dose) por horário.',
-        'Redução: Após controle, reduzir 10 a 20% ao dia e espaçar intervalos para 12 ou 24 horas.',
-        'Descontinuação: Pode ser tentada quando a dose atingir 0.05 mg/kg/dia.',
+        'Atenção: A dose máxima por horário (dose única) é de 0.1 mg/kg.',
+        'Incrementos: Aumentar em 0.05 mg/kg/dose APENAS até o limite máximo de 0.1 mg/kg/dose por horário.',
+        'Redução: Após controle, reduzir 10 a 20% da dose total ao dia.',
       ],
     },
     {
       name: 'Fenobarbital',
       tags: ['Adjuvante', 'Escolha Não-Narcótica'],
       description:
-        'Escolha para abstinência não narcótica ou de múltiplas drogas. Na abstinência narcótica, é preferível em associação com derivados do ópio. Causa sedação, sucção fraca e é ineficaz para sintomas gastrointestinais.',
+        'Escolha para abstinência não narcótica ou de múltiplas drogas. Na abstinência narcótica, é preferível em associação com derivados do ópio.',
       dose: 'Ataque (opcional): 10–20 mg/kg. Manutenção: 3–5 mg/kg/dia.',
-      adjustments: [
-        'Ajustes: A manutenção pode ser ajustada pelos escores de abstinência ou aumentada em 2 mg/kg/dia.',
-        'Redução: Reduzir 10 a 20% ao dia após melhora clínica.',
-      ],
+      adjustments: ['Redução: Reduzir 10 a 20% ao dia após melhora clínica.'],
+    },
+    {
+      name: 'Clorpromazina',
+      tags: ['Adjuvante', 'Neuroléptico'],
+      description: 'Alternativa adjuvante eficaz para sintomas do SNC e gastrointestinais.',
+      dose: '0.5–1 mg/kg/dose (500–1000 mcg/kg/dose) a cada 6 horas.',
+      adjustments: ['Referência: Cochrane Neonatal 2021; OpenEvidence AI'],
+    },
+    {
+      name: 'Clonidina',
+      tags: ['Adjuvante', 'Agonista Alfa-2'],
+      description:
+        'Usado como terapia adjuvante para reduzir a necessidade de opioides e atenuar hiperatividade autonômica.',
+      dose: '4–6 mcg/kg/dose a cada 4 horas.',
+      adjustments: ['Referência: Pediatrics 2020; Cochrane 2021; OpenEvidence AI'],
     },
     {
       name: 'Lorazepam',
       tags: ['Benzodiazepínico', 'Sedação'],
-      description:
-        'Uso para sedação isolada ou com derivados do ópio para permitir doses menores. Estudos em recém-nascidos são escassos.',
+      description: 'Uso para sedação isolada ou com derivados do ópio.',
       dose: '0.05 a 0.1 mg/kg/dose EV.',
-      adjustments: [],
-    },
-    {
-      name: 'Diazepam',
-      tags: ['Benzodiazepínico', 'Pouco Recomendado'],
-      description: 'Pouco recomendado devido a problemas em recém-nascidos.',
-      dose: '0.1 a 0.3 mg/kg IM a cada 8 horas até controle. (Pouco recomendado)',
       adjustments: [],
     },
   ]
@@ -85,7 +88,8 @@ export function Pharmacology() {
         ))}
       </div>
       <p className="text-xs text-muted-foreground mt-4 italic text-right">
-        Referência Clínica: Pediatrics 2020;146(5):e2020029074 (Patrick SW, et al.)
+        Referência Clínica: Pediatrics 2020;146(5):e2020029074 (Patrick SW, et al.) | Cochrane
+        Neonatal 2021 | OpenEvidence AI
       </p>
     </div>
   )

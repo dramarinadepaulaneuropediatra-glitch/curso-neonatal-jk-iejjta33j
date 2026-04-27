@@ -134,7 +134,27 @@ export const COURSE_DATA: Module[] = [
     description: 'Base científica do protocolo.',
     duration: '5 min',
     thumbnail: 'https://img.usecurling.com/p/400/300?q=books&color=gray',
-    lessons: [{ id: 'm7-l1', title: 'Bibliografia', type: 'references' }],
+    lessons: [
+      {
+        id: 'm7-l1',
+        title: 'Bibliografia',
+        type: 'info-cards',
+        content: [
+          {
+            title: 'Pediatrics 2020',
+            text: 'Patrick SW, et al. Neonatal Abstinence Syndrome. Pediatrics. 2020;146(5):e2020029074. Diretriz principal para avaliação ESC e dosagens de opióides.',
+          },
+          {
+            title: 'Cochrane Neonatal 2021',
+            text: 'Revisão sistemática sobre o uso de adjuvantes (Clorpromazina, Clonidina) e eficácia no controle de sintomas neurovegetativos e TGI na Síndrome de Abstinência Neonatal.',
+          },
+          {
+            title: 'OpenEvidence AI',
+            text: 'Análise de dados clínicos e referências sintetizadas corroborando o uso exclusivo da via oral para Metadona fracionada em 4 tomadas diárias (a cada 6h) visando estabilidade no desmame.',
+          },
+        ],
+      },
+    ],
   },
   {
     id: 'm8',
