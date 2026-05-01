@@ -7,6 +7,8 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import { Printer } from 'lucide-react'
 
 export function PocketCards() {
   const [selectedCard, setSelectedCard] = useState<any>(null)
@@ -101,20 +103,30 @@ export function PocketCards() {
   ]
 
   return (
-    <>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="space-y-6">
+      <div className="flex justify-end print-hidden">
+        <Button onClick={() => window.print()} variant="outline">
+          <Printer className="mr-2 h-4 w-4" /> Imprimir Cards da Galeria
+        </Button>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 print:grid-cols-2 print:gap-8">
         {cards.map((c) => (
           <Card
             key={c.title}
-            className="overflow-hidden group cursor-pointer hover:ring-2 ring-primary"
+            className="overflow-hidden group cursor-pointer hover:ring-2 ring-primary print:break-inside-avoid print:ring-0 print:border-2 print:shadow-none"
             onClick={() => setSelectedCard(c)}
           >
             <img
               src={c.img}
               alt={c.title}
-              className="w-full h-48 object-cover group-hover:scale-105 transition-transform"
+              className="w-full h-48 object-cover group-hover:scale-105 transition-transform print:h-32 print:scale-100"
             />
-            <CardContent className="p-3 text-center font-medium text-sm">{c.title}</CardContent>
+            <CardContent className="p-3 text-center font-medium text-sm">
+              <h4 className="font-bold mb-1">{c.title}</h4>
+              <div className="hidden print:block mt-3 pt-3 border-t text-left text-xs text-muted-foreground">
+                {c.content}
+              </div>
+            </CardContent>
           </Card>
         ))}
       </div>
@@ -130,6 +142,6 @@ export function PocketCards() {
           <div className="max-h-[60vh] overflow-y-auto p-1">{selectedCard?.content}</div>
         </DialogContent>
       </Dialog>
-    </>
+    </div>
   )
 }

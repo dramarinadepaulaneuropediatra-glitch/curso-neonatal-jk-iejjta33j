@@ -90,6 +90,28 @@
   }
 }
 
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+  .print-break-inside-avoid {
+    break-inside: avoid;
+  }
+  header,
+  nav,
+  aside {
+    display: none !important;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+}
+
 @layer utilities {
   @keyframes flip {
     from {

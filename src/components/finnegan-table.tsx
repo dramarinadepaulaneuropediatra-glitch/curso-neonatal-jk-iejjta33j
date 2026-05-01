@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Info } from 'lucide-react'
+import { Info, Printer } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export function FinneganTable() {
   const [score, setScore] = useState(0)
@@ -29,7 +30,12 @@ export function FinneganTable() {
 
   return (
     <div className="space-y-6">
-      <div className="sticky top-20 z-10 bg-background/95 backdrop-blur border-b pb-4 pt-2">
+      <div className="flex justify-end print-hidden">
+        <Button onClick={() => window.print()} variant="outline">
+          <Printer className="mr-2 h-4 w-4" /> Imprimir Tabelas de Finnegan
+        </Button>
+      </div>
+      <div className="sticky top-20 z-10 bg-background/95 backdrop-blur border-b pb-4 pt-2 print:static print:bg-transparent">
         <h3 className="text-2xl font-bold flex items-center justify-between">
           Escore Atual:{' '}
           <span

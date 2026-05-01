@@ -122,7 +122,7 @@ const Lesson = () => {
 
         {/* Resources Sidebar (Desktop) */}
         {lesson.pdfUrl && (
-          <div className="w-full lg:w-72 shrink-0">
+          <div className="w-full lg:w-72 shrink-0 print-hidden">
             <div className="sticky top-24 rounded-xl border bg-card p-5 shadow-sm">
               <h3 className="font-semibold mb-4 flex items-center gap-2">
                 <FileText className="h-5 w-5 text-primary" />
@@ -150,7 +150,7 @@ const Lesson = () => {
       </div>
 
       {/* Navigation Dock */}
-      <div className="mt-12 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 sticky bottom-0 bg-background/95 backdrop-blur-sm py-4 -mx-4 px-4 md:-mx-8 md:px-8 z-10 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)]">
+      <div className="mt-12 pt-6 border-t flex flex-col sm:flex-row items-center justify-between gap-4 sticky bottom-0 bg-background/95 backdrop-blur-sm py-4 -mx-4 px-4 md:-mx-8 md:px-8 z-10 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.1)] print-hidden">
         <Button
           variant="outline"
           size="lg"

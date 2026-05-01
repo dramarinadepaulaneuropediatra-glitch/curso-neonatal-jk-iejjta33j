@@ -31,8 +31,9 @@ export default function AdminDashboard() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Nome</TableHead>
+                <TableHead>Nome Completo</TableHead>
                 <TableHead>E-mail</TableHead>
+                <TableHead>Aulas Concluídas</TableHead>
                 <TableHead>Trilha</TableHead>
                 <TableHead>Tentativas</TableHead>
                 <TableHead>Nota</TableHead>
@@ -42,11 +43,16 @@ export default function AdminDashboard() {
             <TableBody>
               {progress.map((p) => (
                 <TableRow key={p.id}>
-                  <TableCell className="font-medium">{p.expand?.user_id?.name || 'N/A'}</TableCell>
+                  <TableCell className="font-medium">
+                    {p.expand?.user_id?.name || p.expand?.user_id?.email || 'N/A'}
+                  </TableCell>
                   <TableCell>{p.expand?.user_id?.email}</TableCell>
+                  <TableCell>
+                    {Array.isArray(p.completed_lessons) ? p.completed_lessons.length : 0}
+                  </TableCell>
                   <TableCell className="capitalize">{p.quiz_type || '-'}</TableCell>
                   <TableCell>{p.quiz_attempts || 0}</TableCell>
-                  <TableCell>{p.quiz_score ? `${p.quiz_score}%` : '-'}</TableCell>
+                  <TableCell>{p.quiz_score != null ? `${p.quiz_score}%` : '-'}</TableCell>
                   <TableCell>
                     {p.passed ? (
                       <Badge className="bg-green-500 hover:bg-green-600">Aprovado</Badge>
@@ -60,7 +66,7 @@ export default function AdminDashboard() {
               ))}
               {progress.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-4">
+                  <TableCell colSpan={7} className="text-center py-4">
                     Nenhum dado encontrado
                   </TableCell>
                 </TableRow>
