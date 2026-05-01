@@ -73,26 +73,36 @@ export function Certificate() {
           <p className="text-md font-medium mt-4 print:text-black">
             Data de Conclusão: {completionDate}
           </p>
-          <div className="grid grid-cols-3 gap-4 pt-12 text-sm font-medium border-t mt-12 text-muted-foreground print:border-gray-300 print:text-gray-600">
+          <div className="grid grid-cols-3 gap-4 pt-12 text-xs md:text-sm font-medium border-t mt-12 text-muted-foreground print:border-gray-300 print:text-gray-600">
             <div>
               <p className="border-t border-muted-foreground/30 pt-2 px-2">
-                Dra. Marina de Paula
+                <span className="font-bold text-foreground print:text-black">
+                  Nilma Matoso Nicácio
+                </span>
                 <br />
-                Coordenação Médica
+                <span className="text-[11px] md:text-xs">
+                  Gerente da Unidade Neonatal do Hospital Júlia Kubitschek
+                </span>
               </p>
             </div>
             <div>
               <p className="border-t border-muted-foreground/30 pt-2 px-2">
-                Letícia Coelho
+                <span className="font-bold text-foreground print:text-black">Letícia Coelho</span>
                 <br />
-                Coordenação de Enfermagem
+                <span className="text-[11px] md:text-xs">
+                  Coordenadora médica do Hospital Júlia Kubitschek
+                </span>
               </p>
             </div>
             <div>
               <p className="border-t border-muted-foreground/30 pt-2 px-2">
-                Nilma Matozinhos
+                <span className="font-bold text-foreground print:text-black">
+                  Marina de Paula Lima Oliveira
+                </span>
                 <br />
-                Diretoria HJK
+                <span className="text-[11px] md:text-xs">
+                  neuropediatra da Unidade Neonatal do Hospital Júlia Kubitischek
+                </span>
               </p>
             </div>
           </div>
